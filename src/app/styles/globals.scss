@@ -1,0 +1,10 @@
+@use '@shared/styles/vars.scss' as *;
+
+@forward './reset.scss';
+@forward '@shared/assets/fonts/fonts.scss';
+
+body {
+  background: $background-color;
+  color: $text-color;
+  font-family: $font-family-base;
+}

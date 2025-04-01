@@ -1,0 +1,20 @@
+@use '@shared/styles/vars.scss' as *;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 25px 15px;
+  background-color: $background-color-base;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  gap: 20px;
+
+  &-title {
+    margin-right: auto;
+    padding: 14px 0;
+    color: $heading-color;
+    text-align: left;
+  }
+}

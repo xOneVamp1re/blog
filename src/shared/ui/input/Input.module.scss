@@ -1,0 +1,43 @@
+@use '@shared/styles/vars.scss' as *;
+
+.label {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 500;
+}
+.input {
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 24px;
+  outline: 1px solid $auth-form-input-border-color;
+  padding: 8px 12px;
+  &:not(:last-of-type) {
+    margin-bottom: 12px;
+  }
+  &::placeholder {
+    color: $auth-form-secondary-color;
+  }
+  &:focus {
+    outline: 1px solid $auth-form-input-border-color;
+    color: $text-color;
+  }
+  &:hover {
+    outline: 1px solid $auth-form-input-border-color;
+    color: $text-color;
+  }
+}
+
+.error {
+  color: $highlight-color;
+  font-size: 14px;
+  line-height: 22px;
+  margin-top: -12px;
+  margin-bottom: 12px;
+}
+.last-error {
+  color: $highlight-color;
+  font-size: 14px;
+  line-height: 22px;
+  margin-bottom: 0;
+  margin-top: 0;
+}

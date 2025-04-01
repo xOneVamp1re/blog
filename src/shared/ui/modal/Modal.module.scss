@@ -1,0 +1,87 @@
+@use '@shared/styles/vars.scss' as *;
+
+.overlay {
+  font-family: $font-family-accent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.content {
+  background: $background-color-base;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.close {
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  margin-top: -3px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  font-size: 16px;
+  line-height: 24px;
+  ul {
+    list-style: disc;
+    padding-left: 25px;
+    margin-bottom: 8px;
+    color: $highlight-color;
+    li {
+      position: relative;
+      &::before {
+        content: '❌';
+        position: absolute;
+        left: -25px;
+      }
+    }
+  }
+  p {
+    text-align: center;
+    color: $text-color;
+  }
+  span {
+    color: $info-color;
+  }
+  a {
+    align-self: center;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  flex-grow: 1;
+  background-color: $info-color;
+  color: $background-color-base;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
