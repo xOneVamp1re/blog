@@ -1,0 +1,11 @@
+@use '@shared/styles/vars.scss' as *;
+.prompt {
+  margin-top: -13px;
+  color: $auth-form-secondary-color;
+  font-size: 12px;
+  line-height: 20px;
+  align-self: center;
+  &-link {
+    color: $info-color;
+  }
+}

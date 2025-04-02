@@ -1,5 +1,9 @@
 @use '@shared/styles/vars.scss' as *;
 
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
 .label {
   font-size: 14px;
   line-height: 22px;
@@ -11,9 +15,7 @@
   line-height: 24px;
   outline: 1px solid $auth-form-input-border-color;
   padding: 8px 12px;
-  &:not(:last-of-type) {
-    margin-bottom: 12px;
-  }
+
   &::placeholder {
     color: $auth-form-secondary-color;
   }
@@ -31,13 +33,4 @@
   color: $highlight-color;
   font-size: 14px;
   line-height: 22px;
-  margin-top: -12px;
-  margin-bottom: 12px;
-}
-.last-error {
-  color: $highlight-color;
-  font-size: 14px;
-  line-height: 22px;
-  margin-bottom: 0;
-  margin-top: 0;
 }

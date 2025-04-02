@@ -1,4 +1,4 @@
-import { SignUp } from '@features/auth/signUp/ui/SignUp'
+import { SignUp } from '@features/auth/signUp'
 
 import styles from './SignUpPage.module.scss'
 
