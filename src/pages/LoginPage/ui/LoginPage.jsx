@@ -1,15 +1,14 @@
 import { Link } from 'react-router'
 
-import { SignUpUser } from '@features/auth/signUp'
+import { LoginUser } from '@features/auth/login'
 
-import styles from './SignUpPage.module.scss'
-
-export const SignUpPage = () => {
+import styles from './LoginPage.module.scss'
+export const LoginPage = () => {
   const isAuth = localStorage.getItem('auth') || false
   if (isAuth) return null
   return (
     <main className={styles.main}>
-      <SignUpUser />
+      <LoginUser />
     </main>
   )
 }

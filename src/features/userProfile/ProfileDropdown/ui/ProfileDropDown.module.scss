@@ -1,0 +1,57 @@
+@use '@shared/styles/vars.scss' as *;
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  color: $heading-color;
+  font-size: 18px;
+  line-height: 28px;
+  background-color: $background-color-base;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  cursor: pointer;
+}
+
+.profileIcon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+}
+
+.dropdownMenu {
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  background-color: whitesmoke;
+  margin-top: 15px;
+  border-radius: 0 0 5px 5px;
+  ::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    right: 0px;
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 20px solid whitesmoke;
+  }
+}
+
+.menuItem {
+  color: $text-color;
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-size: 14px;
+  &:not(:last-of-type) {
+    border-bottom: 1px solid $text-color;
+  }
+}

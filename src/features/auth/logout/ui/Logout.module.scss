@@ -1,0 +1,9 @@
+@use '@shared/styles/vars.scss' as *;
+.button {
+  font-size: 18px;
+  line-height: 28px;
+  padding: 6px 18px;
+  color: $text-color;
+  border-radius: 5px;
+  border: 1px solid $text-color;
+}

@@ -13,10 +13,11 @@ import { useSignUpUserMutation } from '../api/signUpApi'
 
 import { PrivacyPolicy } from './PrivacyPolicy'
 
-export const SignUp = () => {
+export const SignUpUser = () => {
   const { register, handleSubmit, formState, getValues, setError, setFocus } = useForm({
     mode: 'onChange',
   })
+
   const [signUpUser, { data }] = useSignUpUserMutation()
   const { isVisible, show, hide, modalRef } = useModal()
 
@@ -27,9 +28,8 @@ export const SignUp = () => {
       password,
     }
     const signUpUserData = await signUpUser({ user })
-
     if (signUpUserData.error?.data.errors) {
-      for (let [name, text] of Object.entries(signUpUserData.error?.data.errors)) {
+      for (let [name, text] of Object.entries(signUpUserData?.error.data.errors)) {
         setError(name, { message: `${name.charAt(0).toUpperCase() + name.slice(1)} ${text}` })
         setFocus(name)
       }
@@ -87,7 +87,6 @@ export const SignUp = () => {
     password: formState.errors['password']?.message,
     'repeat-password': formState.errors['repeat-password']?.message,
   }
-
   return (
     <>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>

@@ -3,37 +3,30 @@ import { createSlice } from '@reduxjs/toolkit'
 import { rootReducer } from '@app/store/store'
 
 const initialState = {
-  user: null,
-  loading: false,
-  error: null,
+  userData: null,
+  isAuth: JSON.parse(localStorage.getItem('auth')) || false,
 }
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    loginRequest(state) {
-      state.loading = true
-      state.error = null
+    userData: (state, action) => {
+      state.userData = action.payload
     },
-    loginSuccess(state, action) {
-      state.loading = false
-      state.user = action.payload
+    userIsAuth: (state) => {
+      state.isAuth = !state.isAuth
     },
-    loginFailed(state, action) {
-      state.loading = false
-      state.error = action.payload
-    },
-    logout(state) {
-      state.user = null
-      state.loading = false
-      state.error = null
+    logoutUser: (state) => {
+      state.userData = null
+      state.isAuth = false
+      localStorage.removeItem('auth')
     },
   },
   selectors: {
-    selectUser: (state) => state.user,
+    selectUserIsAuth: (state) => state.isAuth,
   },
 }).injectInto(rootReducer)
 
-export const { loginRequest, loginSuccess, loginFailed, logout } = userSlice.actions
-export const { selectUser } = userSlice.selectors
+export const { userData, logoutUser, userIsAuth } = userSlice.actions
+export const { selectUser, selectUserIsAuth } = userSlice.selectors

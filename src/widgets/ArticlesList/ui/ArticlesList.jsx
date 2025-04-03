@@ -3,7 +3,7 @@ import { skipToken } from '@reduxjs/toolkit/query'
 import { useGetArticlesQuery, useGetArticleQuery, useCreateArticleMutation } from '../api/articlesApi'
 
 export const ArticlesList = () => {
-  const { data, status, isLoading } = useGetArticlesQuery()
+  /*   const { data, status, isLoading } = useGetArticlesQuery()
   console.log(data)
   console.log(status)
   console.log(isLoading)
@@ -19,7 +19,7 @@ export const ArticlesList = () => {
     tags: ['tag1', 'tag2'],
   }
   const info = useCreateArticleMutation(body)
-  console.log(info)
+  console.log(info) */
   return (
     <div className="articles-list">
       <h2>Articles List</h2>

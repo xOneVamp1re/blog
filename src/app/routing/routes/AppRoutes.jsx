@@ -1,7 +1,8 @@
-import { useRoutes } from 'react-router'
-// import { AnimatePresence, motion } from 'framer-motion'
+import { useRoutes, Link } from 'react-router'
+import { useSelector } from 'react-redux'
 
-import { AuthPage } from '@pages/AuthPage'
+// import { AnimatePresence, motion } from 'framer-motion'
+import { LoginPage } from '@pages/LoginPage'
 import { HomePage } from '@pages/HomePage'
 import { SignUpPage } from '@pages/SignUpPage'
 import { NoMatchPage } from '@pages/NoMatchPage'
@@ -29,14 +30,29 @@ const AnimatedPage = ({ children }) => (
 export const AppRoutes = () => {
   // const location = useLocation()
   // console.log(location)
+
   const routes = useRoutes([
     {
       path: '/',
       element: <Layout />,
       children: [
-        { path: '/', element: <HomePage /> },
-        { path: '/login', element: <AuthPage /> },
-        { path: '/signUp', element: <SignUpPage /> },
+        { index: true, element: <HomePage /> },
+        {
+          path: '/login',
+          element: <LoginPage />,
+        },
+        {
+          path: '/signUp',
+          element: <SignUpPage />,
+        },
+        /*  {
+          path: 'protected',
+          element: <ProtectedRoutes />,
+          children: [
+            { path: 'dashboard', element: <DashboardPage /> },
+            // другие защищенные маршруты
+          ],
+        }, */
         { path: '*', element: <NoMatchPage /> },
       ],
     },

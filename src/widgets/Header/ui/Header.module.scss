@@ -9,7 +9,7 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 28px;
-  gap: 20px;
+  gap: 27px;
 
   &-title {
     margin-right: auto;
@@ -17,4 +17,16 @@
     color: $heading-color;
     text-align: left;
   }
+}
+
+.link-sign-in {
+  padding: 6px 19px;
+  color: $heading-color;
+  margin-right: -7px;
+}
+.link-sign-up {
+  padding: 6px 19px;
+  border: 1px solid $success-color;
+  border-radius: 5px;
+  color: $success-color;
 }
