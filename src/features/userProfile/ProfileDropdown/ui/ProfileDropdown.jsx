@@ -2,7 +2,6 @@ import { useState, useRef } from 'react'
 // import { useSelector } from 'react-redux'
 import { Link } from 'react-router'
 
-// import { userData } from '@entities/User'
 import { useOutsideClick } from '@shared/hooks/useOutsideClick'
 
 import styles from './ProfileDropdown.module.scss'
