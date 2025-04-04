@@ -113,7 +113,7 @@ export const SignUpUser = () => {
           }}
         />
         <SubmitButton label="Create" type="submit" disabled={!formState.isValid} />
-        <PromptTo to="/login" linkTitle="Sign In" />
+        <PromptTo to="/login" link="Sign In" prompt="Already have an account?" />
       </form>
 
       <Modal

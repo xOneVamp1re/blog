@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 
 import { useAuth } from '@shared/hooks/useAuth'
 
-export const PrivateRoute = ({ children }) => {
+export const AuthRoute = ({ children }) => {
   const isAuth = useAuth()
-  return isAuth ? children : <Navigate to="/login" />
+  return !isAuth ? children : <Navigate to="/" />
 }
 
-PrivateRoute.propTypes = {
+AuthRoute.propTypes = {
   children: PropTypes.node.isRequired,
 }

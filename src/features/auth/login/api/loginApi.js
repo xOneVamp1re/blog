@@ -1,5 +1,5 @@
 import { baseApi } from '@shared/API/api'
-import { userData, userIsAuth } from '@entities/User'
+import { userIsAuth } from '@entities/User'
 
 export const loginUser = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -9,14 +9,11 @@ export const loginUser = baseApi.injectEndpoints({
         method: 'POST',
         body: user,
       }),
-      // invalidatesTags: [{ type: 'user', id: 'login' }],
-      onQueryStarted: async (arg, { queryFulfilled, dispatch }) => {
+      onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
         try {
-          const {
-            data: { user },
-          } = await queryFulfilled
+          const { data } = await queryFulfilled
+          console.log(data)
           dispatch(userIsAuth())
-          dispatch(userData(user))
           localStorage.setItem('auth', true)
         } catch (error) {
           console.error('Ошибка при выполнении запроса:', error)

@@ -1,17 +1,17 @@
 import { useState, useRef } from 'react'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
+import { Link } from 'react-router'
 
-import { userData } from '@entities/User'
+// import { userData } from '@entities/User'
 import { useOutsideClick } from '@shared/hooks/useOutsideClick'
 
 import styles from './ProfileDropdown.module.scss'
-import { Link } from 'react-router'
 
 export const ProfileDropdown = () => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
-  const user = useSelector(userData)
-  console.log(user)
+  // const user = useSelector(userData)
+  // console.log(user)
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
@@ -20,8 +20,8 @@ export const ProfileDropdown = () => {
     setIsOpen(false)
   })
   return (
-    <div className={styles.dropdown}>
-      <button className={styles.header} ref={dropdownRef}>
+    <div className={styles.dropdown} ref={dropdownRef}>
+      <button className={styles.header} onClick={toggleDropdown}>
         <span className={styles.userName}>John Doe</span>
         <img
           src="https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg"

@@ -10,12 +10,12 @@ import { formFields } from '../const/formField'
 import { useLoginUserMutation } from '../api/loginApi'
 
 export const LoginUser = () => {
+  const navigate = useNavigate()
+
   const { register, handleSubmit, formState, setError, setFocus } = useForm({
     mode: 'onChange',
   })
-
   const [loginUser] = useLoginUserMutation()
-  const navigate = useNavigate()
 
   const onSubmit = async ({ email, password }) => {
     const user = {
@@ -24,6 +24,7 @@ export const LoginUser = () => {
     }
     const loginUserData = await loginUser({ user })
     console.log(loginUserData)
+
     if (loginUserData?.error) {
       const [error] = Object.entries(loginUserData.error.data.errors)
       const errorMessage = `${error.join(' ').slice(0, 1).toUpperCase() + error.join(' ').slice(1)}`
@@ -81,7 +82,7 @@ export const LoginUser = () => {
           ))}
         </fieldset>
         <SubmitButton label="Login" type="submit" disabled={!formState.isValid} />
-        <PromptTo to="/singUp" linkTitle="Sign Up" promptText="Don’t have an account?" />
+        <PromptTo to="/singUp" link="Sign Up" prompt="Don’t have an account?" />
       </form>
     </>
   )

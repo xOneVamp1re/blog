@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 
 import styles from './PromptTo.module.scss'
 
-export const PromptTo = ({ to, linkTitle }) => {
+export const PromptTo = ({ to, link, prompt }) => {
   return (
     <p className={styles.prompt}>
-      Already have an account?
+      {prompt}
       <Link to={to}>
-        <span className={styles['prompt-link']}> {linkTitle}</span>
+        <span className={styles['prompt-link']}> {link}</span>
       </Link>
       .
     </p>
@@ -17,5 +17,6 @@ export const PromptTo = ({ to, linkTitle }) => {
 
 PromptTo.propTypes = {
   to: PropTypes.string.isRequired,
-  linkTitle: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  prompt: PropTypes.string.isRequired,
 }

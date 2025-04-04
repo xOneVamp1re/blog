@@ -1,5 +1,5 @@
-import { useRoutes, Link } from 'react-router'
-import { useSelector } from 'react-redux'
+import { useMemo } from 'react'
+import { useRoutes } from 'react-router'
 
 // import { AnimatePresence, motion } from 'framer-motion'
 import { LoginPage } from '@pages/LoginPage'
@@ -7,6 +7,59 @@ import { HomePage } from '@pages/HomePage'
 import { SignUpPage } from '@pages/SignUpPage'
 import { NoMatchPage } from '@pages/NoMatchPage'
 import { Layout } from '@app/routing'
+
+import { PrivateRoute } from './PrivateRoute'
+import { AuthRoute } from './AuthRoute'
+
+const protectedRoutes = [
+  { path: '/profile', element: <HomePage /> },
+  // Добавьте другие защищенные маршруты здесь
+]
+
+const createAuthRoutes = () => [
+  {
+    path: '/login',
+    element: (
+      <AuthRoute>
+        <LoginPage />
+      </AuthRoute>
+    ),
+  },
+  {
+    path: '/signUp',
+    element: (
+      <AuthRoute>
+        <SignUpPage />
+      </AuthRoute>
+    ),
+  },
+]
+const createProtectedRoutes = (routes) => {
+  return routes.map((route) => ({
+    ...route,
+    element: <PrivateRoute>{route.element}</PrivateRoute>,
+  }))
+}
+
+export const AppRoutes = () => {
+  const routes = useMemo(
+    () => [
+      {
+        path: '/',
+        element: <Layout />,
+        children: [
+          { index: true, element: <HomePage /> },
+          ...createAuthRoutes(),
+          ...createProtectedRoutes(protectedRoutes),
+          { path: '*', element: <NoMatchPage /> },
+        ],
+      },
+    ],
+    []
+  )
+
+  return useRoutes(routes)
+}
 
 /* const pageVariants = {
   initial: { opacity: 0, x: 0 },
@@ -26,67 +79,3 @@ const AnimatedPage = ({ children }) => (
       </motion.div>
     </AnimatePresence>
   ) */
-
-export const AppRoutes = () => {
-  // const location = useLocation()
-  // console.log(location)
-
-  const routes = useRoutes([
-    {
-      path: '/',
-      element: <Layout />,
-      children: [
-        { index: true, element: <HomePage /> },
-        {
-          path: '/login',
-          element: <LoginPage />,
-        },
-        {
-          path: '/signUp',
-          element: <SignUpPage />,
-        },
-        /*  {
-          path: 'protected',
-          element: <ProtectedRoutes />,
-          children: [
-            { path: 'dashboard', element: <DashboardPage /> },
-            // другие защищенные маршруты
-          ],
-        }, */
-        { path: '*', element: <NoMatchPage /> },
-      ],
-    },
-  ])
-
-  return routes
-}
-
-/* 
- const navRoutes = [
-    {
-      path: '/',
-      element: <HomePage />,
-    },
-    {
-      path: '/login',
-      element: <AuthPage />,
-    },
-    {
-      path: '/signUp',
-      element: <SignUpPage />,
-    },
-    {
-      path: '*',
-      element: <NoMatchPage />,
-    },
-  ]
-  return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        {navRoutes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
-      </Route>
-    </Routes>
-  )
-*/

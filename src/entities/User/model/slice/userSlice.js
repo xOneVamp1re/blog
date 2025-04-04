@@ -7,7 +7,7 @@ const initialState = {
   isAuth: JSON.parse(localStorage.getItem('auth')) || false,
 }
 
-const userSlice = createSlice({
+export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {

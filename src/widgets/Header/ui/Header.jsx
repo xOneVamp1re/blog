@@ -1,15 +1,14 @@
 import { Link } from 'react-router'
-import { useSelector } from 'react-redux'
 
 import { Logout } from '@features/auth/logout'
-import { selectUserIsAuth } from '@entities/User'
+import { useAuth } from '@shared/hooks/useAuth'
 import { ProfileDropdown } from '@features/userProfile/ProfileDropdown'
 import { LinkButton } from '@shared/ui/button/LinkButton'
 
 import styles from './Header.module.scss'
 
 export const Header = () => {
-  const isAuth = useSelector(selectUserIsAuth)
+  const isAuth = useAuth()
 
   return (
     <header className={styles.header}>
