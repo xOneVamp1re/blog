@@ -10,8 +10,6 @@ import styles from './ProfileDropdown.module.scss'
 export const ProfileDropdown = () => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
-  // const user = useSelector(userData)
-  // console.log(user)
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
