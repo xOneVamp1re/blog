@@ -3,7 +3,8 @@ import { useState, useRef } from 'react'
 import { Link } from 'react-router'
 
 import { useOutsideClick } from '@shared/hooks/useOutsideClick'
-import styles from '@features/userProfile/ProfileDropdown/ui/ProfileDropdown.module.scss'
+
+import styles from './dropdown.module.scss'
 
 export const ProfileDropdown = () => {
   const [isOpen, setIsOpen] = useState(false)
