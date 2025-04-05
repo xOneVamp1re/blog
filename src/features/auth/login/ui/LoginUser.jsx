@@ -10,12 +10,11 @@ import { formFields } from '../const/formField'
 import { useLoginUserMutation } from '../api/loginApi'
 
 export const LoginUser = () => {
-  const navigate = useNavigate()
-
   const { register, handleSubmit, formState, setError, setFocus } = useForm({
     mode: 'onChange',
   })
   const [loginUser] = useLoginUserMutation()
+  const navigate = useNavigate()
 
   const onSubmit = async ({ email, password }) => {
     const user = {
@@ -23,7 +22,6 @@ export const LoginUser = () => {
       password,
     }
     const loginUserData = await loginUser({ user })
-    console.log(loginUserData)
 
     if (loginUserData?.error) {
       const [error] = Object.entries(loginUserData.error.data.errors)
@@ -33,8 +31,7 @@ export const LoginUser = () => {
       setError('password', { message: errorMessage })
       setFocus('email')
     } else {
-      localStorage.setItem('token', loginUserData?.data.user.token)
-      navigate('/', { replace: true })
+      navigate('/')
     }
   }
 
@@ -52,9 +49,12 @@ export const LoginUser = () => {
         value: 6,
         message: 'Your password needs to be at least 6 characters',
       },
+      maxLength: {
+        value: 40,
+        message: 'Your password needs to be at most 40 characters',
+      },
       pattern: {
-        value: /^.{6,}$/,
-        message: 'Your password needs to be at least 6 characters',
+        value: /^.{6,40}$/,
       },
     },
   }
@@ -81,8 +81,8 @@ export const LoginUser = () => {
             />
           ))}
         </fieldset>
-        <SubmitButton label="Login" type="submit" disabled={!formState.isValid} />
-        <PromptTo to="/singUp" link="Sign Up" prompt="Don’t have an account?" />
+        <SubmitButton label="Login" type="submit" disabled={Object.keys(formState.errors).length > 0} />
+        <PromptTo to="/signUp" link="Sign Up" prompt="Don’t have an account?" />
       </form>
     </>
   )

@@ -42,15 +42,17 @@ export const SignUpUser = () => {
     email: {
       required: 'This field is required',
       pattern: {
-        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Z]{2,4}$/i,
         message: 'Invalid email address',
       },
     },
     username: {
       required: 'This field is required',
+      minLength: { value: 3, message: 'Username must be at least 3 characters' },
+      maxLength: { value: 20, message: 'Username must be at most 20 characters' },
       pattern: {
-        value: /^[A-Za-z0-9]{1,100}$/,
-        message: 'Username is invalid',
+        value: /^[a-zA-Z0-9]{3,20}$/,
+        message: 'Only letters and numbers are allowed',
       },
     },
     password: {
@@ -59,9 +61,12 @@ export const SignUpUser = () => {
         value: 6,
         message: 'Your password needs to be at least 6 characters',
       },
+      maxLength: {
+        value: 40,
+        message: 'Your password needs to be at most 40 characters',
+      },
       pattern: {
-        value: /^.{6,}$/,
-        message: 'Your password needs to be at least 6 characters',
+        value: /^.{6,40}$/,
       },
     },
     'repeat-password': {
@@ -70,9 +75,12 @@ export const SignUpUser = () => {
         value: 6,
         message: 'Your password needs to be at least 6 characters',
       },
+      maxLength: {
+        value: 40,
+        message: 'Your password needs to be at most 40 characters',
+      },
       pattern: {
-        value: /^.{6,}$/,
-        message: 'Your password needs to be at least 6 characters',
+        value: /^.{6,40}$/,
       },
       validate: (value) => {
         const { password } = getValues()
@@ -112,7 +120,7 @@ export const SignUpUser = () => {
             }),
           }}
         />
-        <SubmitButton label="Create" type="submit" disabled={!formState.isValid} />
+        <SubmitButton label="Create" type="submit" disabled={Object.keys(formState.errors).length > 0} />
         <PromptTo to="/login" link="Sign In" prompt="Already have an account?" />
       </form>
 

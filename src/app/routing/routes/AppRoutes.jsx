@@ -6,14 +6,16 @@ import { LoginPage } from '@pages/LoginPage'
 import { HomePage } from '@pages/HomePage'
 import { SignUpPage } from '@pages/SignUpPage'
 import { NoMatchPage } from '@pages/NoMatchPage'
+import { UserProfilePage } from '@pages/UserProfilePage'
+import { UserProfileEditPage } from '@pages/UserProfileEditPage'
 import { Layout } from '@app/routing'
 
 import { PrivateRoute } from './PrivateRoute'
 import { AuthRoute } from './AuthRoute'
 
 const protectedRoutes = [
-  { path: '/profile', element: <HomePage /> },
-  // Добавьте другие защищенные маршруты здесь
+  { path: '/profile', element: <UserProfilePage /> },
+  { path: '/editProfile', element: <UserProfileEditPage /> },
 ]
 
 const createAuthRoutes = () => [

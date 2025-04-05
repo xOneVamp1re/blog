@@ -1,17 +1,15 @@
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 
-import { userIsAuth } from '@entities/User'
+import { logoutUser } from '@entities/User'
 
 import styles from './Logout.module.scss'
 
 export const Logout = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const handleClick = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('auth')
-    dispatch(userIsAuth())
+  const handleClick = async () => {
+    dispatch(logoutUser())
     navigate('/', { replace: true })
   }
   return (

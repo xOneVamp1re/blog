@@ -7,7 +7,6 @@ export const Layout = () => {
     <>
       <Header />
       <Outlet />
-      <footer>2025</footer>
     </>
   )
 }

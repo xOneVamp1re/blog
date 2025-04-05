@@ -1,5 +1,5 @@
 import { baseApi } from '@shared/API/api'
-import { userIsAuth } from '@entities/User'
+import { apiToken, userIsAuth } from '@entities/User'
 
 export const loginUser = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -11,14 +11,20 @@ export const loginUser = baseApi.injectEndpoints({
       }),
       onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
         try {
-          const { data } = await queryFulfilled
-          console.log(data)
+          const {
+            data: {
+              user: { token },
+            },
+          } = await queryFulfilled
+          localStorage.setItem('token', token)
+          dispatch(apiToken(token))
           dispatch(userIsAuth())
           localStorage.setItem('auth', true)
         } catch (error) {
-          console.error('Ошибка при выполнении запроса:', error)
+          console.error('Ошибка при выполнении запроса login:', error)
         }
       },
+      invalidatesTags: ['User'],
     }),
   }),
   overrideExisting: true,
