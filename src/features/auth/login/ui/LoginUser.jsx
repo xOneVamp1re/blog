@@ -39,7 +39,7 @@ export const LoginUser = () => {
     email: {
       required: 'This field is required',
       pattern: {
-        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+        value: /^(?!.*\s)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Z]{2,4}$/i,
         message: 'Invalid email address',
       },
     },
@@ -54,7 +54,8 @@ export const LoginUser = () => {
         message: 'Your password needs to be at most 40 characters',
       },
       pattern: {
-        value: /^.{6,40}$/,
+        value: /^\S*$/,
+        message: 'Password should not contain spaces',
       },
     },
   }

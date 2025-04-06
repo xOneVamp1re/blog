@@ -1,13 +1,11 @@
 import { ArticlesList } from '@widgets/ArticlesList'
 
+import styles from './HomePage.module.scss'
+
 export const HomePage = () => {
   return (
-    <div
-      style={{
-        textAlign: 'center',
-        marginTop: '100px',
-      }}>
+    <main className={styles.main}>
       <ArticlesList />
-    </div>
+    </main>
   )
 }

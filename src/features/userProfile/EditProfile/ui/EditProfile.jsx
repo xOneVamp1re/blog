@@ -12,7 +12,6 @@ export const EditProfile = () => {
     mode: 'onChange',
   })
   const [editProfile] = useEditProfileMutation()
-  // const { data } = useGetUserQuery()
   const onSubmit = async ({ username, email, password, avatar: image }) => {
     const updateUser = {
       user: {
@@ -41,9 +40,9 @@ export const EditProfile = () => {
   }
   const validation = {
     username: {
-      required: 'This field is required',
       minLength: { value: 3, message: 'Username must be at least 3 characters' },
       maxLength: { value: 20, message: 'Username must be at most 20 characters' },
+      required: 'This field is required',
       pattern: {
         value: /^[a-zA-Z0-9]{3,20}$/,
         message: 'Only letters and numbers are allowed',
@@ -55,20 +54,28 @@ export const EditProfile = () => {
         value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Z]{2,4}$/i,
         message: 'Invalid email address',
       },
+      validate: (value) => {
+        if (/^\s|\s$/.test(value)) {
+          return 'Email should not contain leading or trailing spaces'
+        }
+        return true
+      },
     },
     password: {
-      requeired: 'This field is required',
       minLength: {
         value: 6,
         message: 'Your password needs to be at least 6 characters',
       },
+      maxLength: {
+        value: 40,
+        message: 'Your password needs to be at most 40 characters',
+      },
       pattern: {
-        value: /^.{6,}$/,
-        message: 'Your password needs to be at least 6 characters',
+        value: /^\S*$/,
+        message: 'Password should not contain spaces',
       },
     },
     avatar: {
-      required: 'This field is required',
       pattern: {
         value: /^(https?:\/\/)([a-zA-Z0-9.-]+)(:[0-9]{1,5})?(\/[^\s]*)?$/i,
         message: 'Invalid URL',
@@ -81,6 +88,7 @@ export const EditProfile = () => {
     password: formState.errors['password']?.message,
     avatar: formState.errors['avatar']?.message,
   }
+
   return (
     <>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>

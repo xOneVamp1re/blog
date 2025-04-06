@@ -42,7 +42,7 @@ export const SignUpUser = () => {
     email: {
       required: 'This field is required',
       pattern: {
-        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Z]{2,4}$/i,
+        value: /^(?!.*\s)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Z]{2,4}$/i,
         message: 'Invalid email address',
       },
     },
@@ -66,7 +66,8 @@ export const SignUpUser = () => {
         message: 'Your password needs to be at most 40 characters',
       },
       pattern: {
-        value: /^.{6,40}$/,
+        value: /^\S*$/,
+        message: 'Password should not contain spaces',
       },
     },
     'repeat-password': {
@@ -80,7 +81,7 @@ export const SignUpUser = () => {
         message: 'Your password needs to be at most 40 characters',
       },
       pattern: {
-        value: /^.{6,40}$/,
+        value: /^\S*$/,
       },
       validate: (value) => {
         const { password } = getValues()

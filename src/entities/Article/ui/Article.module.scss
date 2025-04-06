@@ -1,0 +1,90 @@
+@use '@shared/styles/vars.scss' as *;
+
+.article {
+  background-color: $background-color-base;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 15px 0 20px;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
+  &-header {
+    display: grid;
+    grid-template-areas:
+      'title info'
+      'tags info'
+      'desc .';
+    column-gap: 85px;
+    margin-bottom: 25px;
+  }
+  &-title {
+    grid-area: title;
+    color: $info-color;
+    font-size: 20px;
+    line-height: 28px;
+    margin-bottom: 4px;
+    flex-shrink: 1;
+  }
+  &-tags {
+    grid-area: tags;
+    color: $text-color-secondary;
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    &--preview {
+      margin-bottom: 4px;
+    }
+  }
+  &-tag {
+    font-size: 12px;
+    border: 1px solid;
+    border-color: $text-color-secondary;
+    padding: 3px 6px;
+    border-radius: 2px;
+    line-height: 15px;
+  }
+  &-info {
+    grid-area: info;
+    display: grid;
+    grid-template-areas:
+      'username avatar'
+      'datatime avatar';
+    grid-template-rows: 28px 22px;
+    grid-template-columns: auto 58px;
+    justify-self: flex-end;
+    &-author {
+      grid-area: username;
+      color: $heading-color;
+      font-size: 18px;
+      line-height: 28px;
+
+      &-avatar {
+        grid-area: avatar;
+        justify-self: flex-end;
+
+        width: 46px;
+        height: 46px;
+        border-radius: 50px;
+      }
+    }
+    &-datatime {
+      grid-area: datatime;
+      color: $text-color-secondary;
+      font-size: 12px;
+
+      line-height: 22px;
+    }
+  }
+  &-short-desc {
+    grid-area: desc;
+    font-size: 12px;
+    line-height: 22px;
+  }
+  &-body {
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: break-word;
+  }
+  &-desc {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
