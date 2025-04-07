@@ -1,11 +1,11 @@
+import { Link } from 'react-router'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import styles from './Article.module.scss'
 
-export const Article = ({ preview, ...props }) => {
-  const { author = {}, title = '', tagList, updatedAt, body, description } = props || {}
-
+export const Article = ({ preview = false, ...props }) => {
+  const { author = {}, title = '', tagList, updatedAt, body, description, slug } = props || {}
   const transformDate = (date) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' }
     return new Date(date).toLocaleDateString('en-US', options)
@@ -21,6 +21,7 @@ export const Article = ({ preview, ...props }) => {
         shortDesc={description}
         tagList={tagList}
         preview={preview}
+        slug={slug}
       />
       {!preview && <Article.Body desc={body} />}
       {!preview && <Article.Footer />}
@@ -36,6 +37,7 @@ Article.Header = function ArticleHeader({
   datatime,
   shortDesc,
   preview,
+  slug,
   className = '',
 }) {
   const headerClasses = classNames(styles['article-header'], className, {
@@ -44,12 +46,19 @@ Article.Header = function ArticleHeader({
   const tagsClasses = classNames(styles['article-tags'], className, {
     [styles['article-tags--preview']]: preview,
   })
+  // const { slug } = useParams() || {}
   return (
     <div className={headerClasses}>
-      <h3 className={styles['article-title']}>{title}</h3>
+      {preview ? (
+        <Link to={`article/${slug}`}>
+          <h3 className={styles['article-title']}>{title}</h3>{' '}
+        </Link>
+      ) : (
+        <h3 className={styles['article-title']}>{title}</h3>
+      )}
       <ul className={tagsClasses}>
-        {Array.from(tagList).map((el) => (
-          <li key={el} className={styles['article-tag']}>
+        {Array.from(tagList).map((el, i) => (
+          <li key={i} className={styles['article-tag']}>
             {el}
           </li>
         ))}
@@ -89,6 +98,7 @@ Article.Header.propTypes = {
   shortDesc: PropTypes.string.isRequired,
   datatime: PropTypes.string.isRequired,
   userAvatar: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
   className: PropTypes.string,
 }
 Article.Body.propTypes = {

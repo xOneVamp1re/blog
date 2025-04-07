@@ -20,6 +20,7 @@ export const userSlice = createSlice({
       state.isAuth = false
       localStorage.removeItem('auth')
       localStorage.removeItem('token')
+      sessionStorage.removeItem('pagination-current-page')
     },
     userIsLoading: (state, action) => {
       state.isLoadingUser = action.payload

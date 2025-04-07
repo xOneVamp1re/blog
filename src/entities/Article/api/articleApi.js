@@ -7,16 +7,15 @@ const articleApi = baseApi.injectEndpoints({
         url: `/articles/${slug}`,
         method: 'GET',
       }),
-      onQueryStarted: async (arg, { queryFulfilled }) => {
+      onQueryStarted: async (_, { queryFulfilled }) => {
         try {
-          const result = await queryFulfilled
-          console.log('Запрос успешно выполнен!', result)
-        } catch (error) {
-          console.error('Ошибка при выполнении запроса getUser:', error)
+          const { data } = await queryFulfilled
+          console.log('Запрос успешно выполнен!', data)
+        } catch (e) {
+          console.log('Ошибка', e)
         }
       },
       transformResponse: (response) => {
-        console.log(response)
         return response
       },
     }),
