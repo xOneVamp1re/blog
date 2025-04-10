@@ -9,6 +9,8 @@ import { NoMatchPage } from '@pages/NoMatchPage'
 import { UserProfilePage } from '@pages/UserProfilePage'
 import { UserProfileEditPage } from '@pages/UserProfileEditPage'
 import { ArticlePage } from '@pages/ArticlePage'
+import { CreateArticlePage } from '@pages/СreateArticlePage'
+import { EditArticlePage } from '@pages/EditArticlePage'
 import { Layout } from '@app/routing'
 
 import { PrivateRoute } from './PrivateRoute'
@@ -18,7 +20,9 @@ const protectedRoutes = [
   { path: '/profile', element: <UserProfilePage /> },
   { path: '/editProfile', element: <UserProfileEditPage /> },
   { path: '/articles', element: <HomePage /> },
+  { path: '/new-article', element: <CreateArticlePage /> },
   { path: '/article/:slug', element: <ArticlePage /> },
+  { path: '/article/:slug/edit', element: <EditArticlePage /> },
 ]
 
 const createAuthRoutes = () => [

@@ -9,11 +9,11 @@
   line-height: 22px;
   font-weight: 500;
 }
-.input {
+.textarea {
+  resize: none;
   border-radius: 4px;
   font-size: 16px;
   line-height: 24px;
-  font-weight: 400;
   outline: 1px solid $auth-form-input-border-color;
   padding: 8px 12px;
 
@@ -34,10 +34,4 @@
   color: $highlight-color;
   font-size: 14px;
   line-height: 22px;
-  font-weight: 400;
-}
-
-.tags {
-  align-self: flex-start;
-  width: 300px;
 }

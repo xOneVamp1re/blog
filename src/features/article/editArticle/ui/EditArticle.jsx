@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router'
+// import { useNavigate } from 'react-router'
 
 import { Input } from '@shared/ui/input'
 import { Textarea } from '@shared/ui/textarea'
@@ -8,17 +8,15 @@ import { SubmitButton } from '@shared/ui/button/SubmitButton'
 import styles from '@shared/styles/ArticleForm.module.scss'
 
 import { formFields } from '../const/formFields'
-import { useCreateArticleMutation } from '../api/createArticleApi'
 
 import { TagsInput } from './TagsInput'
 
-export const CreateArticle = () => {
-  const { register, handleSubmit, formState, control, resetField, unregister, clearErrors, reset } = useForm({
+export const EditArticle = () => {
+  const { register, handleSubmit, formState, control, resetField, unregister, clearErrors } = useForm({
     mode: 'onChange',
   })
   const [tagsData, setTagsData] = useState([])
-  const [createArticle] = useCreateArticleMutation()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const onSubmit = async ({ title, description, body, ...rest }) => {
     const tagsField = Object.values(rest)
@@ -28,11 +26,12 @@ export const CreateArticle = () => {
       body,
       tagList: tagsField.filter((tag) => tag.trim() !== ''),
     }
-    const response = await createArticle({ article })
+    console.log(article)
+    /*  const response = await createArticle({ article })
     if (response.data) {
       reset()
       navigate(`/article/${response.data?.article.slug}`)
-    }
+    } */
   }
 
   const validation = {
@@ -64,7 +63,7 @@ export const CreateArticle = () => {
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <fieldset className={styles['form-fieldset']}>
-        <legend className={styles['form-legend']}>Create new article</legend>
+        <legend className={styles['form-legend']}>Edit article</legend>
 
         {formFields.map((field) => {
           return field.type === 'textarea' ? (

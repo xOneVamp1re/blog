@@ -13,7 +13,7 @@ export const PaginationArticlesList = ({ currentPage, totalPages, handlePageChan
       onChange={handlePageChange}
       showTitle={false}
       style={{
-        'margin-top': '26px',
+        marginTop: '26px',
       }}
     />
   )

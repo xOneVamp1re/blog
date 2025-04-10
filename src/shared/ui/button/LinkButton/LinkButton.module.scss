@@ -20,3 +20,12 @@
   border: 1px solid $error-color;
   color: $error-color;
 }
+.edit-article {
+  padding: 6px 19px;
+  border-width: 1px;
+  border-color: $success-color;
+  border-style: solid;
+  color: $success-color;
+  font-size: 14px;
+  line-height: 22px;
+}

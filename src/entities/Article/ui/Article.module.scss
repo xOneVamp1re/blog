@@ -17,6 +17,7 @@
     margin-bottom: 25px;
     &--preview {
       min-height: 100px;
+      grid-template-rows: 32px 24px auto;
     }
   }
   &-title {
@@ -74,7 +75,7 @@
       grid-area: datatime;
       color: $text-color-secondary;
       font-size: 12px;
-
+      justify-self: flex-end;
       line-height: 22px;
     }
   }
@@ -89,6 +90,7 @@
     flex-direction: column;
     overflow-wrap: break-word;
     text-overflow: ellipsis;
+    white-space: pre-wrap;
   }
   &-desc {
     font-size: 20px;

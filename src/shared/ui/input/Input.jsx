@@ -29,8 +29,9 @@ Input.Label = function InputLabel({ htmlFor, children, className = '' }) {
 }
 
 Input.Field = function InputField({ type, id, placeholder, validation, className = '' }) {
-  const inputClasses = classNames(styles.input, styles[className])
-
+  const inputClasses = classNames(styles.input, {
+    [styles[className]]: className,
+  })
   return <input className={inputClasses} type={type} id={id} placeholder={placeholder} {...validation} />
 }
 

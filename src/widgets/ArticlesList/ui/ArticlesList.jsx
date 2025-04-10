@@ -10,7 +10,6 @@ export const ArticlesList = () => {
   const { currentPage, totalPages, handlePageChange, pageSize } = usePagination()
   const { data, isFetching } = useGetArticlesQuery({ limit: pageSize, offset: (currentPage - 1) * pageSize })
 
-  console.log(isFetching)
   return (
     <section className={styles.articles}>
       {isFetching ? (

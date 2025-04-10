@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 
 import { logoutUser } from '@entities/User'
+// import { baseApi } from '@shared/API/api'
 
 import styles from './Logout.module.scss'
 
@@ -10,6 +11,7 @@ export const Logout = () => {
   const navigate = useNavigate()
   const handleClick = async () => {
     dispatch(logoutUser())
+    // dispatch(baseApi.util.resetApiState())
     navigate('/', { replace: true })
   }
   return (

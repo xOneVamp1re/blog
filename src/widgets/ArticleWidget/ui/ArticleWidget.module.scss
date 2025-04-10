@@ -4,4 +4,12 @@
   height: 80vh;
   margin-bottom: 64px;
   overflow-y: auto;
+  position: relative;
+}
+.actions {
+  position: absolute;
+  right: 14px;
+  top: 91px;
+  display: flex;
+  gap: 12px;
 }

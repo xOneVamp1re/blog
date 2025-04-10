@@ -8,7 +8,7 @@ export const usePagination = () => {
     return savedPage ? parseInt(savedPage) : 1
   })
   const pageSize = 5
-  const { data } = useGetArticlesQuery()
+  const { data } = useGetArticlesQuery({ limit: pageSize, offset: (currentPage - 1) * pageSize })
   const totalPages = data?.articlesCount
 
   const handlePageChange = (page) => {

@@ -18,6 +18,7 @@ export const userSlice = createSlice({
     },
     logoutUser: (state) => {
       state.isAuth = false
+      state.apiToken = null
       localStorage.removeItem('auth')
       localStorage.removeItem('token')
       sessionStorage.removeItem('pagination-current-page')

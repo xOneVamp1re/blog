@@ -28,13 +28,6 @@ export const EditProfile = () => {
         setError(name, { message: msg }, { shouldFocus: true })
       }
     } else {
-      /*  const {
-        data: { user = {} },
-      } = response
-
-      if (user?.username === data.username) {
-        setError('username', { message: 'Ты дебил, имя такое же', shouldFocus: true })
-      } */
       reset()
     }
   }

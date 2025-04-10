@@ -46,7 +46,7 @@ Article.Header = function ArticleHeader({
   const tagsClasses = classNames(styles['article-tags'], className, {
     [styles['article-tags--preview']]: preview,
   })
-  // const { slug } = useParams() || {}
+
   return (
     <div className={headerClasses}>
       {preview ? (

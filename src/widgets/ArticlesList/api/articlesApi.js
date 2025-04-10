@@ -3,7 +3,6 @@ export const articlesApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getArticles: build.query({
       query: ({ limit = 5, offset = 0 } = {}) => {
-        console.log(limit, offset)
         return {
           url: `/articles?limit=${limit}&offset=${offset}`,
         }
@@ -20,6 +19,7 @@ export const articlesApi = baseApi.injectEndpoints({
         return response
       },
       providesTags: ['Articles'],
+      keepUnusedDataFor: 10,
     }),
   }),
   overrideExisting: true,

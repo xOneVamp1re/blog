@@ -11,14 +11,14 @@ export const LinkButton = ({ action, buttonText, to }) => {
     navigate(to)
   }
   return (
-    <button className={classes} onClick={() => handleClick(to)}>
+    <button className={classes} type="button" onClick={() => handleClick(to)}>
       {buttonText}
     </button>
   )
 }
 
 LinkButton.propTypes = {
-  color: PropTypes.string,
+  action: PropTypes.string,
   buttonText: PropTypes.string,
   to: PropTypes.string,
 }
