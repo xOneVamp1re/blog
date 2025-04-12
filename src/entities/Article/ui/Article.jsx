@@ -51,7 +51,7 @@ Article.Header = function ArticleHeader({
   return (
     <div className={headerClasses}>
       {preview ? (
-        <Link to={`article/${slug}`}>
+        <Link to={`/article/${slug}`}>
           <h3 className={styles['article-title']}>{title}</h3>{' '}
         </Link>
       ) : (
