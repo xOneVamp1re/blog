@@ -1,12 +1,11 @@
 import { baseApi } from '@shared/API/api'
 
-const editArticle = baseApi.injectEndpoints({
+const deleteArticle = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    editArticle: builder.mutation({
-      query: (article) => ({
-        url: '/articles/slug',
-        method: 'POST',
-        body: article,
+    deleteArticle: builder.mutation({
+      query: (slug) => ({
+        url: `/articles/${slug}`,
+        method: 'DELETE',
       }),
       onQueryStarted: async (_, { queryFulfilled }) => {
         try {
@@ -16,10 +15,10 @@ const editArticle = baseApi.injectEndpoints({
           console.error(error)
         }
       },
-      invalidatesTags: ['Articles', 'Article'],
+      invalidatesTags: ['Articles'],
     }),
   }),
   overrideExisting: true,
 })
 
-export const { useEditArticleMutation } = editArticle
+export const { useDeleteArticleMutation } = deleteArticle

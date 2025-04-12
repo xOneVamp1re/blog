@@ -7,14 +7,18 @@
   padding: 15px 15px 0 20px;
   box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
   width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   &-header {
     display: grid;
     grid-template-areas:
       'title info'
       'tags info'
-      'desc .';
+      'desc desc';
     column-gap: 85px;
     margin-bottom: 25px;
+    min-height: 100px;
+    grid-template-rows: 32px 36px auto;
     &--preview {
       min-height: 100px;
       grid-template-rows: 32px 24px auto;
@@ -84,6 +88,15 @@
     font-size: 12px;
     line-height: 22px;
     overflow-wrap: break-word;
+    display: flex;
+    justify-content: space-between;
+    gap: 71px;
+    &-btn {
+      display: flex;
+      gap: 8px;
+      position: relative;
+      align-self: flex-start;
+    }
   }
   &-body {
     display: flex;

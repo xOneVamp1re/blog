@@ -18,6 +18,7 @@ const articleApi = baseApi.injectEndpoints({
       transformResponse: (response) => {
         return response
       },
+      providesTags: ['Article'],
     }),
   }),
   overrideExisting: true,

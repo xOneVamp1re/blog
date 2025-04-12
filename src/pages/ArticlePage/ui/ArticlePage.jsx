@@ -10,5 +10,3 @@ export const ArticlePage = () => {
     </main>
   )
 }
-
-// ArticlePage.propTypes = {}

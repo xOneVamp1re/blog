@@ -29,10 +29,7 @@ export const ProfileDropdown = () => {
       <button className={styles.header} onClick={toggleDropdown}>
         <span className={styles.userName}>{data?.username}</span>
         <img
-          src={
-            data?.image ||
-            'https://w7.pngwing.com/pngs/67/675/png-transparent-account-avatar-man-person-profile-business-and-marketing-icon.png'
-          }
+          src={data?.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'}
           alt="Profile"
           className={styles.profileIcon}
           onLoad={test}
@@ -42,10 +39,10 @@ export const ProfileDropdown = () => {
       {isOpen && (
         <nav className={styles.dropdownMenu}>
           <Link to="/profile" className={styles.menuItem}>
-            View Profile
+            View
           </Link>
           <Link to="/editProfile" className={styles.menuItem}>
-            Edit Profile
+            Edit
           </Link>
           <Link to="https://t.me/xOneVamp1re" className={styles.menuItem}>
             Support

@@ -5,12 +5,11 @@ import classNames from 'classnames'
 import styles from './Article.module.scss'
 
 export const Article = ({ preview = false, ...props }) => {
-  const { author = {}, title = '', tagList, updatedAt, body, description, slug } = props || {}
+  const { author = {}, title = '', tagList, updatedAt, body, description, slug, actionButtons } = props || {}
   const transformDate = (date) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' }
     return new Date(date).toLocaleDateString('en-US', options)
   }
-
   return (
     <article className={styles.article}>
       <Article.Header
@@ -22,6 +21,7 @@ export const Article = ({ preview = false, ...props }) => {
         tagList={tagList}
         preview={preview}
         slug={slug}
+        actionButtons={actionButtons}
       />
       {!preview && <Article.Body desc={body} />}
       {!preview && <Article.Footer />}
@@ -39,6 +39,7 @@ Article.Header = function ArticleHeader({
   preview,
   slug,
   className = '',
+  actionButtons,
 }) {
   const headerClasses = classNames(styles['article-header'], className, {
     [styles['article-header--preview']]: preview,
@@ -70,7 +71,10 @@ Article.Header = function ArticleHeader({
           {datatime}
         </time>
       </div>
-      <p className={styles['article-short-desc']}>{shortDesc}</p>
+      <div className={styles['article-short-desc']}>
+        <p>{shortDesc}</p>
+        {!preview && <div className={styles['article-short-desc-btn']}>{actionButtons}</div>}
+      </div>
     </div>
   )
 }
@@ -100,6 +104,7 @@ Article.Header.propTypes = {
   userAvatar: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
   className: PropTypes.string,
+  actionButtons: PropTypes.string,
 }
 Article.Body.propTypes = {
   desc: PropTypes.string.isRequired,

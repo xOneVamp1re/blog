@@ -1,22 +1,45 @@
-import { useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
-// import { useNavigate } from 'react-router'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useNavigate, useParams } from 'react-router'
 
 import { Input } from '@shared/ui/input'
 import { Textarea } from '@shared/ui/textarea'
 import { SubmitButton } from '@shared/ui/button/SubmitButton'
+import { useGetArticleQuery } from '@entities/Article'
 import styles from '@shared/styles/ArticleForm.module.scss'
 
 import { formFields } from '../const/formFields'
+import { useEditArticleMutation } from '../api/editArticleApi'
 
 import { TagsInput } from './TagsInput'
 
 export const EditArticle = () => {
-  const { register, handleSubmit, formState, control, resetField, unregister, clearErrors } = useForm({
+  const { slug } = useParams() || {}
+  const { data = {} } = useGetArticleQuery(slug)
+  const { title, description, body, tagList = [] } = data?.article || {}
+  const [tagsData, setTagsData] = useState(() => {
+    return tagList || []
+  })
+
+  const { register, handleSubmit, formState, resetField, unregister, reset } = useForm({
     mode: 'onChange',
   })
-  const [tagsData, setTagsData] = useState([])
-  // const navigate = useNavigate()
+
+  useEffect(() => {
+    setTagsData(tagList)
+    reset({
+      title,
+      description,
+      body,
+      ...tagList.reduce((acc, el, index) => {
+        acc[`tag-${index}`] = el
+        return acc
+      }, {}),
+    })
+  }, [reset, data])
+
+  const navigate = useNavigate()
+  const [editArticle] = useEditArticleMutation()
 
   const onSubmit = async ({ title, description, body, ...rest }) => {
     const tagsField = Object.values(rest)
@@ -24,14 +47,10 @@ export const EditArticle = () => {
       title,
       description,
       body,
-      tagList: tagsField.filter((tag) => tag.trim() !== ''),
+      tagList: tagsField,
     }
-    console.log(article)
-    /*  const response = await createArticle({ article })
-    if (response.data) {
-      reset()
-      navigate(`/article/${response.data?.article.slug}`)
-    } */
+    await editArticle({ slug, data: { article } })
+    navigate(`/article/${slug}`)
   }
 
   const validation = {
@@ -50,6 +69,7 @@ export const EditArticle = () => {
       required: 'Text is required',
     },
   }
+
   const errors = {
     title: formState.errors['title']?.message,
     description: formState.errors['description']?.message,
@@ -67,27 +87,15 @@ export const EditArticle = () => {
 
         {formFields.map((field) => {
           return field.type === 'textarea' ? (
-            <Controller
-              name={field.id}
+            <Textarea
               key={field.id}
-              control={control}
-              defaultValue=""
-              rules={validation[field.id]}
-              render={({ field }) => (
-                <Textarea
-                  {...field}
-                  type="textarea"
-                  label="Text"
-                  htmlFor="body"
-                  id="body"
-                  onChange={(e) => {
-                    field.onChange(e)
-                    clearErrors('body')
-                  }}
-                  placeholder="Text"
-                  error={errors?.body}
-                />
-              )}
+              type={field.type}
+              label={field.label}
+              htmlFor={field.htmlFor}
+              id={field.id}
+              placeholder={field.placeholder}
+              validation={{ ...register(field.id, validation[field.id]) }}
+              error={errors[field.id]}
             />
           ) : (
             <Input

@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 export const useModal = () => {
   const [isVisible, setIsVisible] = useState(false)
   const modalRef = useRef(null)
+  const buttonRef = useRef(null)
 
   const show = () => setIsVisible(true)
   const hide = () => setIsVisible(false)
@@ -15,7 +16,12 @@ export const useModal = () => {
     }
 
     const handleOverlayClick = (e) => {
-      if (modalRef.current && !modalRef.current.contains(e.target)) {
+      if (
+        modalRef.current &&
+        buttonRef.current &&
+        !modalRef.current.contains(e.target) &&
+        !buttonRef.current.contains(e.target)
+      ) {
         hide()
       }
     }
@@ -37,5 +43,6 @@ export const useModal = () => {
     show,
     hide,
     modalRef,
+    buttonRef,
   }
 }

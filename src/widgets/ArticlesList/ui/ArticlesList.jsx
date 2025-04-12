@@ -9,7 +9,6 @@ import styles from './ArticleList.module.scss'
 export const ArticlesList = () => {
   const { currentPage, totalPages, handlePageChange, pageSize } = usePagination()
   const { data, isFetching } = useGetArticlesQuery({ limit: pageSize, offset: (currentPage - 1) * pageSize })
-
   return (
     <section className={styles.articles}>
       {isFetching ? (
