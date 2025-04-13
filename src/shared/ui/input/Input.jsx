@@ -4,7 +4,17 @@ import classNames from 'classnames'
 import styles from './Input.module.scss'
 
 export const Input = (props) => {
-  const { label, htmlFor, type, id, placeholder, validation = {}, error = '', classNames = {} } = props
+  const {
+    label,
+    htmlFor,
+    type,
+    id,
+    placeholder,
+    autocomplete = '',
+    validation = {},
+    error = '',
+    classNames = {},
+  } = props
 
   return (
     <div className={styles['form-field']}>
@@ -13,7 +23,14 @@ export const Input = (props) => {
           {label}
         </Input.Label>
       )}
-      <Input.Field className={classNames.input} type={type} id={id} placeholder={placeholder} validation={validation} />
+      <Input.Field
+        className={classNames.input}
+        type={type}
+        id={id}
+        placeholder={placeholder}
+        autocomplete={autocomplete}
+        validation={validation}
+      />
       <Input.Error className={classNames.error} error={error} />
     </div>
   )
@@ -28,11 +45,20 @@ Input.Label = function InputLabel({ htmlFor, children, className = '' }) {
   )
 }
 
-Input.Field = function InputField({ type, id, placeholder, validation, className = '' }) {
+Input.Field = function InputField({ type, id, placeholder, autocomplete, validation, className = '' }) {
   const inputClasses = classNames(styles.input, {
     [styles[className]]: className,
   })
-  return <input className={inputClasses} type={type} id={id} placeholder={placeholder} {...validation} />
+  return (
+    <input
+      className={inputClasses}
+      type={type}
+      id={id}
+      autoComplete={autocomplete}
+      placeholder={placeholder}
+      {...validation}
+    />
+  )
 }
 
 Input.Error = function InputError({ error, className = '' }) {
@@ -50,6 +76,7 @@ Input.propTypes = {
   validation: PropTypes.object,
   error: PropTypes.string,
   classNames: PropTypes.object,
+  autocomplete: PropTypes.string,
 }
 
 Input.Label.propTypes = {
@@ -62,6 +89,7 @@ Input.Field.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string,
   id: PropTypes.string,
+  autocomplete: PropTypes.string,
   placeholder: PropTypes.string,
   validation: PropTypes.object,
 }

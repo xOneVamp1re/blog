@@ -5,6 +5,7 @@ export const formFields = [
     type: 'email',
     id: 'email',
     placeholder: 'Email Address',
+    autocomplete: 'email',
   },
   {
     label: 'Password',
@@ -12,5 +13,6 @@ export const formFields = [
     type: 'password',
     id: 'password',
     placeholder: 'Password',
+    autocomplete: 'current-password',
   },
 ]

@@ -77,6 +77,7 @@ export const LoginUser = () => {
               type={field.type}
               id={field.id}
               placeholder={field.placeholder}
+              autocomplete={field.autocomplete}
               validation={{ ...register(field.id, validation[field.id]) }}
               error={errors[field.id]}
             />
