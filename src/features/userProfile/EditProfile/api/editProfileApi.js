@@ -11,10 +11,9 @@ export const editProfileApi = baseApi.injectEndpoints({
       }),
       onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
         try {
-          const { data } = await queryFulfilled
+          await queryFulfilled
           dispatch(baseApi.util.invalidateTags(['User']))
           dispatch(userAvatarIsLoading(true))
-          console.log(data)
         } catch (err) {
           console.error(err)
         }

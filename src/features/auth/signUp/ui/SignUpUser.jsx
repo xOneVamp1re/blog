@@ -19,7 +19,7 @@ export const SignUpUser = () => {
   })
 
   const [signUpUser, { data }] = useSignUpUserMutation()
-  const { isVisible, show, hide, modalRef } = useModal()
+  const { isVisible, show, hide, modalRef } = useModal(true)
 
   const onSubmit = async ({ username, email, password }) => {
     const user = {
@@ -135,7 +135,7 @@ export const SignUpUser = () => {
         modalRef={modalRef}>
         <>
           <p>{`Welcome to our community, ${data?.user.username}`}!</p>
-          <Link to="/login">
+          <Link to="/login" style={{ color: '#1890ff', cursor: 'pointer' }}>
             <span>Now you can login to your account.</span>
           </Link>
         </>

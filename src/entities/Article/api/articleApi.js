@@ -7,18 +7,12 @@ const articleApi = baseApi.injectEndpoints({
         url: `/articles/${slug}`,
         method: 'GET',
       }),
-      onQueryStarted: async (_, { queryFulfilled }) => {
-        try {
-          const { data } = await queryFulfilled
-          console.log('Запрос успешно выполнен!', data)
-        } catch (e) {
-          console.log('Ошибка', e)
-        }
-      },
       transformResponse: (response) => {
         return response
       },
-      providesTags: ['Article'],
+      providesTags: (result, error, slug) => {
+        return error ? [] : [{ type: 'Article', id: slug }]
+      },
     }),
   }),
   overrideExisting: true,

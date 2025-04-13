@@ -7,15 +7,7 @@ const deleteArticle = baseApi.injectEndpoints({
         url: `/articles/${slug}`,
         method: 'DELETE',
       }),
-      onQueryStarted: async (_, { queryFulfilled }) => {
-        try {
-          const data = await queryFulfilled
-          console.log('запрос выполнен успеншо', data)
-        } catch (error) {
-          console.error(error)
-        }
-      },
-      invalidatesTags: ['Articles'],
+      invalidatesTags: (result, error, { slug }) => [{ type: 'Article', id: slug }, { type: 'Articles' }],
     }),
   }),
   overrideExisting: true,

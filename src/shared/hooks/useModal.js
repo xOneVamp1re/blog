@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 
-export const useModal = () => {
+export const useModal = (withoutBtn = false) => {
   const [isVisible, setIsVisible] = useState(false)
   const modalRef = useRef(null)
   const buttonRef = useRef(null)
@@ -16,13 +16,19 @@ export const useModal = () => {
     }
 
     const handleOverlayClick = (e) => {
-      if (
-        modalRef.current &&
-        buttonRef.current &&
-        !modalRef.current.contains(e.target) &&
-        !buttonRef.current.contains(e.target)
-      ) {
-        hide()
+      if (!withoutBtn) {
+        if (
+          modalRef.current &&
+          buttonRef.current &&
+          !modalRef.current.contains(e.target) &&
+          !buttonRef.current.contains(e.target)
+        ) {
+          hide()
+        }
+      } else {
+        if (modalRef.current && !modalRef.current.contains(e.target)) {
+          hide()
+        }
       }
     }
 

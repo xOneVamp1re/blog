@@ -21,7 +21,6 @@ const protectedRoutes = [
   { path: '/editProfile', element: <UserProfileEditPage /> },
   { path: '/articles', element: <HomePage /> },
   { path: '/new-article', element: <CreateArticlePage /> },
-  { path: '/article/:slug', element: <ArticlePage /> },
   { path: '/article/:slug/edit', element: <EditArticlePage /> },
 ]
 
@@ -58,6 +57,7 @@ export const AppRoutes = () => {
         element: <Layout />,
         children: [
           { index: true, element: <HomePage /> },
+          { path: '/article/:slug', element: <ArticlePage /> },
           ...createAuthRoutes(),
           ...createProtectedRoutes(protectedRoutes),
           { path: '*', element: <NoMatchPage /> },

@@ -8,14 +8,6 @@ const createArticle = baseApi.injectEndpoints({
         method: 'POST',
         body: article,
       }),
-      onQueryStarted: async (_, { queryFulfilled }) => {
-        try {
-          const data = await queryFulfilled
-          console.log('запрос выполнен успеншо', data)
-        } catch (error) {
-          console.error(error)
-        }
-      },
       invalidatesTags: ['Articles'],
     }),
   }),

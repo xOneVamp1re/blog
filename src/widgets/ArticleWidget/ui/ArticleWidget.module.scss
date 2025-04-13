@@ -1,8 +1,22 @@
+@use '@shared/styles/vars.scss' as *;
+
 .article {
   display: flex;
   width: 65%;
   height: 80vh;
   margin-bottom: 64px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.skeleton {
+  background-color: $background-color-base; // Цвет фона для скелетона
+  display: flex;
+  flex-direction: column;
+  padding: 15px 15px 0 20px;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  overflow-x: hidden;
   overflow-y: auto;
   position: relative;
 }

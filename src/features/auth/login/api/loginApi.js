@@ -20,6 +20,7 @@ export const loginUser = baseApi.injectEndpoints({
           dispatch(apiToken(token))
           dispatch(userIsAuth())
           localStorage.setItem('auth', true)
+          dispatch(baseApi.util.invalidateTags([{ type: 'Articles' }, { type: 'Article' }]))
         } catch (error) {
           console.error('Ошибка при выполнении запроса login:', error)
         }

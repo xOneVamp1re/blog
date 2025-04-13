@@ -5,7 +5,17 @@ import classNames from 'classnames'
 import styles from './Article.module.scss'
 
 export const Article = ({ preview = false, ...props }) => {
-  const { author = {}, title = '', tagList, updatedAt, body, description, slug, actionButtons } = props || {}
+  const {
+    author = {},
+    title = '',
+    tagList,
+    updatedAt,
+    body,
+    description,
+    slug,
+    actionButtons,
+    favoriteButton,
+  } = props || {}
   const transformDate = (date) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' }
     return new Date(date).toLocaleDateString('en-US', options)
@@ -22,6 +32,7 @@ export const Article = ({ preview = false, ...props }) => {
         preview={preview}
         slug={slug}
         actionButtons={actionButtons}
+        favoriteButton={favoriteButton}
       />
       {!preview && <Article.Body desc={body} />}
       {!preview && <Article.Footer />}
@@ -40,6 +51,7 @@ Article.Header = function ArticleHeader({
   slug,
   className = '',
   actionButtons,
+  favoriteButton,
 }) {
   const headerClasses = classNames(styles['article-header'], className, {
     [styles['article-header--preview']]: preview,
@@ -51,11 +63,17 @@ Article.Header = function ArticleHeader({
   return (
     <div className={headerClasses}>
       {preview ? (
-        <Link to={`/article/${slug}`}>
-          <h3 className={styles['article-title']}>{title}</h3>{' '}
-        </Link>
+        <div className={styles['article-title']}>
+          <Link className={styles['article-title-link']} to={`/article/${slug}`}>
+            <h3 className={styles['article-title']}>{title}</h3>
+          </Link>
+          {favoriteButton}
+        </div>
       ) : (
-        <h3 className={styles['article-title']}>{title}</h3>
+        <div className={styles['article-title']}>
+          <h3>{title}</h3>
+          {favoriteButton}
+        </div>
       )}
       <ul className={tagsClasses}>
         {Array.from(tagList).map((el, i) => (
@@ -105,6 +123,7 @@ Article.Header.propTypes = {
   slug: PropTypes.string.isRequired,
   className: PropTypes.string,
   actionButtons: PropTypes.string,
+  favoriteButton: PropTypes.string,
 }
 Article.Body.propTypes = {
   desc: PropTypes.string.isRequired,
