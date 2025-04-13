@@ -15,7 +15,9 @@ import { TagsInput } from './TagsInput'
 
 export const EditArticle = () => {
   const { slug } = useParams() || {}
+  const navigate = useNavigate()
   const { data = {} } = useGetArticleQuery(slug)
+
   const { title, description, body, tagList = [] } = data?.article || {}
   const [tagsData, setTagsData] = useState(() => {
     return tagList || []
@@ -26,6 +28,7 @@ export const EditArticle = () => {
   })
 
   useEffect(() => {
+    if (!data.article?.author) return navigate('/')
     setTagsData(tagList)
     reset({
       title,
@@ -38,7 +41,6 @@ export const EditArticle = () => {
     })
   }, [reset, data])
 
-  const navigate = useNavigate()
   const [editArticle] = useEditArticleMutation()
 
   const onSubmit = async ({ title, description, body, ...rest }) => {
