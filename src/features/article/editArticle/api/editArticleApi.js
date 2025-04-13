@@ -4,7 +4,6 @@ const editArticle = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     editArticle: builder.mutation({
       query: ({ slug, data }) => {
-        console.log(data)
         return {
           url: `/articles/${slug}`,
           method: 'PUT',
