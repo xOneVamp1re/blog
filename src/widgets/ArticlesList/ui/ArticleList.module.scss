@@ -3,12 +3,14 @@
   flex-direction: column;
   align-items: center;
   width: 65%;
+
   &-list {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 26px;
     width: 100%;
+
     &-item {
       width: 100%;
     }

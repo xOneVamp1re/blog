@@ -1,71 +1,79 @@
 @use '@shared/styles/vars.scss' as *;
 
 .article {
-  background-color: $background-color-base;
   display: flex;
   flex-direction: column;
-  padding: 15px 15px 0 20px;
-  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
   width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
+  padding: 15px 15px 0 20px;
+  overflow: hidden auto;
+  background-color: $background-color-base;
+  box-shadow: 0 4px 12px 0 rgb(0 0 0 / 15%);
+
   &-header {
     display: grid;
     grid-template-areas:
       'title info'
       'tags info'
       'desc desc';
-    column-gap: 85px;
-    margin-bottom: 25px;
-    min-height: 100px;
     grid-template-rows: 32px 36px auto;
+    min-height: 100px;
+    margin-bottom: 25px;
+    column-gap: 85px;
+
     &--preview {
-      min-height: 100px;
       grid-template-rows: 32px 24px auto;
+      min-height: 100px;
     }
   }
+
   &-title {
+    display: flex;
     grid-area: title;
+    flex-shrink: 1;
+    align-items: center;
+    margin-bottom: 4px;
+    column-gap: 13px;
     color: $info-color;
     font-size: 20px;
     line-height: 28px;
-    margin-bottom: 4px;
-    flex-shrink: 1;
-    display: flex;
-    column-gap: 13px;
-    align-items: center;
+
     &-link {
       height: 28px;
     }
   }
+
   &-tags {
-    grid-area: tags;
-    color: $text-color-secondary;
     display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
+    grid-area: tags;
     align-self: flex-start;
+    margin-bottom: 16px;
+    color: $text-color-secondary;
+    gap: 8px;
+
     &--preview {
       margin-bottom: 4px;
     }
   }
+
   &-tag {
-    font-size: 12px;
-    border: 1px solid;
-    border-color: $text-color-secondary;
     padding: 3px 6px;
+    border: 1px solid;
     border-radius: 2px;
+    border-color: $text-color-secondary;
+    font-size: 12px;
     line-height: 15px;
   }
+
   &-info {
-    grid-area: info;
     display: grid;
+    grid-area: info;
     grid-template-areas:
       'username avatar'
       'datatime avatar';
-    grid-template-rows: 28px 22px;
     grid-template-columns: auto 58px;
+    grid-template-rows: 28px 22px;
     justify-self: flex-end;
+
     &-author {
       grid-area: username;
       color: $heading-color;
@@ -75,12 +83,12 @@
       &-avatar {
         grid-area: avatar;
         justify-self: flex-end;
-
         width: 46px;
         height: 46px;
         border-radius: 50px;
       }
     }
+
     &-datatime {
       grid-area: datatime;
       color: $text-color-secondary;
@@ -89,14 +97,16 @@
       line-height: 22px;
     }
   }
+
   &-short-desc {
+    display: flex;
     grid-area: desc;
+    justify-content: space-between;
     font-size: 12px;
     line-height: 22px;
     overflow-wrap: break-word;
-    display: flex;
-    justify-content: space-between;
     gap: 71px;
+
     &-btn {
       display: flex;
       gap: 8px;
@@ -104,6 +114,7 @@
       align-self: flex-start;
     }
   }
+
   &-body {
     display: flex;
     flex-direction: column;
@@ -111,6 +122,7 @@
     text-overflow: ellipsis;
     white-space: pre-wrap;
   }
+
   &-desc {
     font-size: 20px;
     line-height: 28px;

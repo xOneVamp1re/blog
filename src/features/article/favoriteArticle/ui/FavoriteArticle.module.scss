@@ -1,26 +1,27 @@
 @use '@shared/styles/vars.scss' as *;
 
 .favorite-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 28px;
   color: $text-color;
   font-size: 12px;
   line-height: 22px;
-  height: 28px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   gap: 5px;
 }
 
 .icon {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   width: 16px;
   height: 16px;
+
   &-heart {
     width: 16px;
     height: 16px;
-    fill: red;
     transition-property: fill;
+    fill: red;
   }
 }
