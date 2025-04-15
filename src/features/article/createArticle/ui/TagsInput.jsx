@@ -5,14 +5,16 @@ import { Input } from '@shared/ui/input'
 import styles from '@shared/styles/ArticleForm.module.scss'
 
 export const TagsInput = ({ register, errors = {}, resetField, unregister, tagsData = [], setTagsData }) => {
-  const handleClickDeleteTag = (index) => {
-    const updatedTags = tagsData.filter((_, i) => i !== index)
+  const handleClickDeleteTag = (id) => {
+    resetField(`tag-${id}`)
+    unregister(`tag-${id}`)
+    const updatedTags = tagsData.filter((el) => el.id !== id)
     setTagsData(updatedTags)
-    resetField(`tag-${index}`)
-    unregister(`tag-${index}`)
   }
   const handleClickAddTag = () => {
-    setTagsData([...tagsData, ''])
+    const id = Math.random().toString(36).slice(2, 11)
+    const newTag = { value: '', id }
+    setTagsData([...tagsData, newTag])
   }
   const validation = {
     tags: {
@@ -25,16 +27,16 @@ export const TagsInput = ({ register, errors = {}, resetField, unregister, tagsD
       Tags
       {tagsData.map((el, index) => {
         return (
-          <li className={styles['form-tag']} key={index}>
+          <li className={styles['form-tag']} key={el.id}>
             <Input
               type="text"
-              id={index}
+              id={el.id}
               placeholder="Tag"
               classNames={{ input: 'tags' }}
-              validation={{ ...register(`tag-${index}`, validation.tags) }}
-              error={errors.tags[index]}
+              validation={{ ...register(`tag-${el.id}`, validation.tags) }}
+              error={errors.tags[`tag-${el.id}`]}
             />
-            <ModifyButton buttonText="Delete" action="delete" cb={() => handleClickDeleteTag(index)} />
+            <ModifyButton buttonText="Delete" action="delete" cb={() => handleClickDeleteTag(el.id)} />
             {index === tagsData.length - 1 && tagsData.length < 5 && (
               <ModifyButton buttonText="Add Tag" action="add" cb={handleClickAddTag} />
             )}

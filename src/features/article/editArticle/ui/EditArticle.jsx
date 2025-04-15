@@ -29,13 +29,15 @@ export const EditArticle = () => {
 
   useEffect(() => {
     if (!data.article?.author) return navigate('/')
-    setTagsData(tagList)
+    const tagsWithId = tagList.map((el) => ({ value: el, id: Math.random().toString(36).slice(2, 11) }))
+    setTagsData(tagsWithId)
     reset({
       title,
       description,
       body,
-      ...tagList.reduce((acc, el, index) => {
-        acc[`tag-${index}`] = el
+      ...tagsWithId.reduce((acc, value) => {
+        const el = `tag-${value.id}`
+        acc[el] = value.value
         return acc
       }, {}),
     })
@@ -76,10 +78,10 @@ export const EditArticle = () => {
     title: formState.errors['title']?.message,
     description: formState.errors['description']?.message,
     body: formState.errors['body']?.message,
-    tags: tagsData.reduce((acc, value, index) => {
-      acc.push(formState.errors[`tag-${index}`]?.message)
+    tags: tagsData.reduce((acc, value) => {
+      acc[`tag-${value.id}`] = formState.errors[`tag-${value.id}`]?.message
       return acc
-    }, []),
+    }, {}),
   }
 
   return (
