@@ -5,16 +5,19 @@ import styles from '@shared/styles/userForm.module.scss'
 import { SubmitButton } from '@shared/ui/button/SubmitButton'
 import { Input } from '@shared/ui/input'
 import { PromptTo } from '@shared/ui/promptTo'
+import { useModal } from '@shared/hooks/useModal'
+import { Modal } from '@shared/ui/modal/Modal'
 
 import { formFields } from '../const/formField'
 import { useLoginUserMutation } from '../api/loginApi'
 
 export const LoginUser = () => {
-  const { register, handleSubmit, formState, setError, setFocus } = useForm({
+  const { register, handleSubmit, formState } = useForm({
     mode: 'onChange',
   })
   const [loginUser] = useLoginUserMutation()
   const navigate = useNavigate()
+  const { isVisible, show, hide, modalRef } = useModal(true)
 
   const onSubmit = async ({ email, password }) => {
     const user = {
@@ -24,12 +27,7 @@ export const LoginUser = () => {
     const loginUserData = await loginUser({ user })
 
     if (loginUserData?.error) {
-      const [error] = Object.entries(loginUserData.error.data.errors)
-      const errorMessage = `${error.join(' ').slice(0, 1).toUpperCase() + error.join(' ').slice(1)}`
-
-      setError('email', { message: errorMessage })
-      setError('password', { message: errorMessage })
-      setFocus('email')
+      show()
     } else {
       navigate('/')
     }
@@ -86,6 +84,17 @@ export const LoginUser = () => {
         <SubmitButton label="Login" type="submit" disabled={Object.keys(formState.errors).length > 0} />
         <PromptTo to="/signUp" link="Sign Up" prompt="Don’t have an account?" />
       </form>
+      <Modal
+        title="Error"
+        onOk={() => {
+          hide()
+        }}
+        isVisible={isVisible}
+        onCancel={hide}
+        modalRef={modalRef}
+        customClassName="error">
+        <p>Invalid email or password</p>
+      </Modal>
     </>
   )
 }

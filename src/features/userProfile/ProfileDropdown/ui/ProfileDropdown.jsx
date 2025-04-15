@@ -44,7 +44,11 @@ export const ProfileDropdown = () => {
           <Link to="/editProfile" className={styles.menuItem}>
             Edit
           </Link>
-          <Link to="https://t.me/xOneVamp1re" className={styles.menuItem}>
+          <Link
+            to="https://t.me/xOneVamp1re"
+            className={styles.menuItem}
+            target="_blank"
+            rel="noopener noreferrer external">
             Support
           </Link>
         </nav>
